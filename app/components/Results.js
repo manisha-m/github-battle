@@ -10,14 +10,29 @@ function puke(object) {
 
 function Results (props) {
     console.log("Results: player 1 %o", props.playerInfo[0]);
-    var playerOneHeading = (props.score[0] > props.score[1]) ? "Winner" : "Loser";
-    var playerTwoHeading = (props.score[1] > props.score[0]) ? "Winner" : "Loser";
-    if(props.isLoading === true) {
+        if(props.isLoading === true) {
         return (
             <div> LOADING </div>
         );
-    } else {
+    } 
+    
+    if(props.score[0] === props.score[1]) {
         return (
+            <div className='jumbotron col-sm-12 text-center' style={styles.transparentBg}>
+                <h1>It's a tie!</h1>
+                <div className='col-sm-12'>
+                    <Link to='/playerOne'>
+                        <button className='btn btn-success' style={styles.space}>Start Over</button>
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+    
+    var playerOneHeading = (props.score[0] > props.score[1]) ? "Winner" : "Loser";
+    var playerTwoHeading = (props.score[1] > props.score[0]) ? "Winner" : "Loser";
+
+    return (
             <div className='jumbotron col-sm-12 text-center' style={styles.transparentBg}>
             <h1>Results</h1>
             <div className='col-sm-8 col-sm-offset-2'>
@@ -36,15 +51,15 @@ function Results (props) {
             </div>
             
             <div className='col-sm-8 col-sm-offset-2'>
-            <div className='col-sm-12 text-center'>
+            <div className='col-sm-12'>
                 <Link to='/playerOne'>
-                    <button className='btn btn-success' style={styles.space}>Start Over </button>
+                    <button className='btn btn-success' style={styles.space}>Start Over</button>
                 </Link>
             </div>
             </div>
         </div>
     )
-    }
+    
 }
 
 Results.propTypes = {
