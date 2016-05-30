@@ -13,11 +13,9 @@ function getPlayerRepos(player) {
 function getStargazersCount(player) {
     return getPlayerRepos(player)
             .then( function (repos) {
-                var stars = repos.data.reduce(function( total, current) {
+                return repos.data.reduce(function( total, current) {
                     return total + current.stargazers_count;
                 }, 0);
-                console.log("Stars: " + stars);
-                return stars;
             })
     
 }
@@ -26,9 +24,8 @@ function calculateScore(playerInfo) {
     console.log("Calculating score for player %o", playerInfo)
      return getStargazersCount(playerInfo.login)
          .then(function (stars){
-         var calcScore = stars * 3 + playerInfo.followers;
-         console.log("Calculated score " + calcScore + " for player " + playerInfo.login);
-         return calcScore;
+         return stars * 3 + playerInfo.followers + playerInfo.public_repos;
+
      });
       
 }
